@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Aastha ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-gradient: linear-gradient(135deg, #ff4d6d, #ff8fa3);
+            --soft-bg: #ffe5ec;
+            --glass: rgba(255, 255, 255, 0.9);
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #fb6f92, #ffe5ec, #ffc2d1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Card Styling */
+        .card-stack {
+            position: relative;
+            width: 360px;
+            height: 500px;
+            perspective: 1000px;
+        }
+
+        .layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            box-sizing: border-box;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .layer.hidden {
+            transform: translateY(-120%) rotate(-10deg) scale(0.8);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #c9184a;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Progress Bar Styling */
+        .progress-container {
+            width: 100%;
+            height: 14px;
+            background: #eee;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--pink-gradient);
+            transition: width 0.4s ease;
+        }
+
+        /* Button Styling */
+        .btn-main {
+            background: var(--pink-gradient);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(255, 77, 109, 0.4);
+        }
+
+        .no-btn {
+            background: #adb5bd;
+            position: absolute;
+            box-shadow: none;
+        }
+
+        /* Floating Hearts */
+        .heart-particle {
+            position: absolute;
+            pointer-events: none;
+            z-index: 100;
+            animation: float-up 4s ease-out forwards;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-stack">
+        <div class="layer" id="layer1">
+            <h1>Hi Maahi!</h1>
+            <p>Hum Tora lel kux line lekhle baani 😊😊<br>Something just for you, Aastha.</p>
+            <div class="progress-container"><div class="progress-fill" style="width: 25%;"></div></div>
+            <button class="btn-main" onclick="nextLayer(1)">Dekhu Ka ba?</button>
+        </div>
+
+        <div class="layer hidden" id="layer2">
+            <h1>For Aastha</h1>
+            <p>I put my feelings into this code. Let's charge it up!</p>
+            <div class="progress-container"><div id="main-meter" class="progress-fill"></div></div>
+            <button class="btn-main" onclick="chargeMeter()">Charge with Love ❤️</button>
+        </div>
+
+        <div class="layer hidden" id="layer3">
+            <h1>You Mes!</h1>
+            <p>Aastha, you make every day special. Will you be my Valentine?</p>
+            <div class="progress-container"><div class="progress-fill" style="width: 100%;"></div></div>
+            <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
+                <button class="btn-main" onclick="celebrate()">YES</button>
+                <button class="btn-main no-btn" id="noBtn" onmouseover="moveNo()">NO</button>
+            </div>
+        </div>
+
+        <div class="layer hidden" id="layer4">
+            <h1>Success! ❤️</h1>
+            <p>Ab hum duniya ke sabse khush naseeb insan bani!<br>I love you, Aastha!</p>
+            <div style="font-size: 4rem;">💖</div>
+        </div>
+    </div>
+
+    <script>
+        let charge = 0;
+
+        function nextLayer(current) {
+            document.getElementById(`layer${current}`).classList.add('hidden');
+            document.getElementById(`layer${current + 1}`).classList.remove('hidden');
+        }
+
+        function chargeMeter() {
+            charge += 25;
+            document.getElementById('main-meter').style.width = charge + '%';
+            spawnHeart();
+            if (charge >= 100) {
+                setTimeout(() => nextLayer(2), 600);
+            }
+        }
+
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - 100) - (window.innerWidth / 2 - 180);
+            const y = Math.random() * (window.innerHeight - 100) - (window.innerHeight / 2 - 250);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function celebrate() {
+            nextLayer(3);
+            setInterval(spawnHeart, 150);
+        }
+
+        function spawnHeart() {
+            const h = document.createElement('div');
+            const hearts = ['❤️', '💖', '🌸', '✨'];
+            h.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            h.className = 'heart-particle';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.top = '100vh';
+            h.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 4000);
+        }
+    </script>
+</body>
+</html>
